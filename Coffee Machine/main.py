@@ -63,6 +63,7 @@ while machineStatus:
         if resource_checker(usr_prompt):
             if cashier(usr_prompt):
                 resources_manager(usr_prompt)
+                print(f"Heres your {usr_prompt}")
             else:
                 print("Not enough money")
         else:
