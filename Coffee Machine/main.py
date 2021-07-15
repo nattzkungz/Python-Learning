@@ -65,6 +65,6 @@ while machineStatus:
                 resources_manager(usr_prompt)
                 print(f"Heres your {usr_prompt}")
             else:
-                print("Not enough money")
+                print("Not enough money, money refunded")
         else:
             print("Not enough resources")
