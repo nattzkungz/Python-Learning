@@ -24,6 +24,6 @@ s.onkey(key="w", fun=forward)
 s.onkey(key="s", fun=backward)
 s.onkey(key="a", fun=turnleft)
 s.onkey(key="d", fun=turnright)
-s.onkey(key="c", fun=clear )
+s.onkey(key="c", fun=clear)
 
 s.exitonclick()
