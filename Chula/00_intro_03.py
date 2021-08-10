@@ -1,11 +1,29 @@
-print("""
-
-""")
-
 # import pywhatkit 
 
-# source_path = 'x.png'
+# source_path = 'y.png'
 # target_path = 'result.txt'
 
 
-# pywhatkit.image_to_ascii_art(source_path, target_path)
+# pywhatkit.image_to_ascii_art(source_path, target_path)pip install pytesseract
+
+# import pytesseract
+# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract-OCR\tesseract''
+
+# print(pytesseract.image_to_string(r'D:\examplepdf2image.png'))
+
+
+print(""""
++------------------------------------------+
+|................................/\........|
+|.............................../##\.......|
+|............................../####\......|
+|............................./######\.....|
+|............................/########\....|
+|.......__................../##########\...|
+|....../##\................/############\..|
+|./\../####\......../\..../##############\.|
+|/##\/######\....../##\../################\|
+|############\..../####\/##################|
+|#############\__/#########################|
++------------------------------------------+
+""")
