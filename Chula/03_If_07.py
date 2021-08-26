@@ -1,0 +1,8 @@
+a = int(input())
+if a <= 999: print(a)
+elif a <= 9999: print(str(round(a/1000, 1)) + "K" )
+elif a <= 999999: print(str(round(a/1000)) + "K")
+elif a <= 9999999: print(str(round(a/1000000, 1)) + "M")
+elif a <= 999999999: print(str(round(a/1000000)) + "M")
+elif a <= 9999999999: print(str(round(a/1000000000, 1)) + "B")
+else: print(str(round(a/1000000000)) + "B")

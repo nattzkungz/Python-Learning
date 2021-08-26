@@ -1,21 +1,11 @@
-# import requests
-import cloudscraper
-import time
-import json
-from random import randint
-scraper = cloudscraper.create_scraper()  # returns a CloudScraper instance
-
-token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDb3VudHJ5Q29kZSI6IlRIIiwiQ291bnRyeU5hbWUiOiJUaGFpbGFuZCIsIklQIjoiMTgwLjE4My4xNTMuMjMiLCJJRCI6MzAsImV4cCI6MTYyOTA0OTU0M30.ZHk25AqVJcibQQI2_FhNYgOENmFcRL-zcQ5Njd3zc-Y"
-captcha_token = "05ANRZuj78DTQOouHg0ikIuGqgFUcn16MRbL6pWznwZ-216dwTUtCxRzlu0u1pp-tPLbvsR5NGr9uJdF8kAaExKgPxrPQmHgvFpNU2xbXM3sGRPJzZRmc1PP35_nY_6Y8UK9W4zrwJK7l0Fq21Ay4Ea4QcYSIUn9IgGS6x9GW1r73IN5GymBP3UtczZ2fGnedZFWRMD00UxFNd1tUdy-4hZG2sixInS8pZfeiBlR9eD-GfkmAaqByitGyQ59ej-2eor3cx_qTTEhB3a44NV_TEIQw0R-KQvtZ0LBk78rfhNqZY14HCVhtKwwsVzn2DolEzrlaVrZ--bo_KWZrD9DGw0CjJ630eMxUq62pyfxAOwXmLlmSCzY_hvKhoX1Pgky73vHdkTjLyeSctElRbpbDh-8P0S9LkiirbUF9STvWcBxz-T2uNg6ZrEUrSJ5GpS6DDQGYOD6CR8YkGy_KGTz8aINawtHVcgnPZFvMzg4Bka4xqwfNf50LY3hgWNE6C0l_PFCIlw8F5uWYxk2rv-NtNnkTDBvMqcrOtaboN91Fi-WGshxWFX92BsEFzRHEbgjmLH1yeK48PYFhDxQnZYq1plRHrZ2wJ0bIdpSxXMPwyBbqbUujk1Om0RzMiAdtmb-XRsEJJec9IgqZGeRvUhAVG6OzFCqxTyMXsN61SH6He6ijihceRW9ZsrdEtSft7qU5cflls7QyovzUTHzUS1Igr8JFQmp74wGOGEytAHITPlhTSdqc8oAawmxJqgN7gNWAx61QW3gD3eTzqiRbFm1tVX-da-Uc7htCUMxbttsUjlouXTP48xRymMVMRwFxHZkeJFlvWg1JmWGLSsw8OEtHgAVt8POFCrI-FocIjRZZlMoJBTrQte1tVzNVDA6L-WtVV4N0ba5RC8CZlCQcXMCD3NQNsDaR_zMT0yMlcxKWXwTORP-fAcXnDPn8G0_6zaRQXcghr3mcgzfc9IU6TqFJsS2aNFLk16a3IuuXL-E_wpxs0An1_iFMy2hUwf5YdcaO8HqXIvvsK_ifNruIvOgV2LrpL9yLV2Puy76Q8wfDJlvtOsUK1_dOxfRMRWoGunLv1ZzBLafqGk1Bga69KaYa5_J1DmW4KAN4Ym7kTOcj9XDHABP9gtzJGSySxA0PElcxmkvuWtwCEBhxXaIsNQBCC2Zhjnh_faH3NjW5wtOjs-Gdy6p9uatOMDO4ER8bPareV5hxkFzogORYXtPqoecXKUsUtC2--k6Va9-xVOfByn0UC7bmMohTXOWnLTg"
-clicked = 0
-for i in range(9999999999):
-	url = f"https://stats.popcat.click/pop?pop_count=800&captcha_token={captcha_token}&token={token}"
-	res = scraper.get(url)
-	if (res.text.startswith("{") and res.text.endswith("}")) or res.status_code == 201:
-		res_json = json.loads(res.text)
-		clicked += 800
-		print(f"POP :O clicked : {clicked}")
-		token = res_json["Token"]
-	else:
-		print(f"PIP :( {res.status_code}")
-	time.sleep(30) #delay a bit
+a = input().split(" ")
+aa = [float(_) for _ in a]
+b = []
+c = aa[0]
+for _ in aa:
+    if c > _:
+        b.append(_)
+        c = _
+    else:
+        pass
+print(b)
