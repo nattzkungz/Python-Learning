@@ -1,1 +1,2 @@
-print((1234 % 1000) // 100)
+a = "Thanakrit Trongmahavisate"
+print(f"{a[0:9]}\n{a[10:len(a)]}")
