@@ -19,7 +19,7 @@ def leap_calc():
 y -= 543
 day_in_months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 n = 0
-if m == 30:
+if day_in_months[m-1] == 30:
     n = 30
 else:
     if m == 2:
@@ -27,6 +27,8 @@ else:
             n = 29
         else:
             n = 28
+    else:
+        n = 31
     
 d = d + 15
 
