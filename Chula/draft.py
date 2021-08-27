@@ -1,2 +1,6 @@
-a = 84560
-print(math.ceil(a))
+a = ["one", "two", "three"]
+b = ["ten", "twenty"]
+
+c = 320
+
+if c < 100: 
