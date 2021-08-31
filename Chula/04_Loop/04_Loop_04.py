@@ -1,16 +1,21 @@
 str_input = input()
-no = False
-for _ in str_input:
-    if _ == "(":
-        str_input.replace("(", "[")
-    elif _ == "[":
-        str_input.replace("[", "(")
-    elif _ == ")":
-        str_input.replace(")", "]")
-    elif _ == "]":
-        str_input.replace("]", ")")
-    # else:
-    #     no = True
+a_list = []
+for i in str_input:
+    a_list.append(i)
 
+for i in range(len(a_list)):
+    if a_list[i] == "[":
+        a_list[i] = "("
+    elif a_list[i] == "(":
+        a_list[i] = "["
+    elif a_list[i] == "]":
+        a_list[i] = ")"
+    elif a_list[i] == ")":
+        a_list[i] = "]"
 
-print(str_input)
+string = ""
+for i in a_list:
+    string += i
+
+print(string)
+print(''.join(a_list))
