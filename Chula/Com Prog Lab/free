@@ -1,0 +1,25 @@
+Arduino: 1.8.16 (Mac OS X), Board: "M5Stack-Core-ESP32, QIO, 80MHz, Default, 921600, None"
+
+
+
+
+
+
+
+
+
+
+
+Multiple libraries were found for "SD.h"
+ Used: /Users/nattmini2014/Library/Arduino15/packages/m5stack/hardware/esp32/1.0.9/libraries/SD
+ Not used: /Applications/Arduino.app/Contents/Java/libraries/SD
+Multiple libraries were found for "WiFiClient.h"
+ Used: /Users/nattmini2014/Library/Arduino15/packages/m5stack/hardware/esp32/1.0.9/libraries/WiFi
+ Not used: /Applications/Arduino.app/Contents/Java/libraries/WiFi
+fork/exec /Users/nattmini2014/Library/Arduino15/packages/m5stack/tools/esptool_py/3.0.0/esptool.py: no such file or directory
+Error compiling for board M5Stack-Core-ESP32.
+
+
+This report would have more information with
+"Show verbose output during compilation"
+option enabled in File -> Preferences.

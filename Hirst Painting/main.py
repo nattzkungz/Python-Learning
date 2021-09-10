@@ -3,7 +3,7 @@ import turtle
 import colorgram
 
 rgb_colors = []
-colors = colorgram.extract("/Users/thanakrittr/Desktop/VSCode/Python-Learning/Hirst Painting/hirst.jpg", 30)
+colors = colorgram.extract("Hirst Painting/hirst.jpg", 30)
 
 for color in colors:
     r = color.rgb.r
