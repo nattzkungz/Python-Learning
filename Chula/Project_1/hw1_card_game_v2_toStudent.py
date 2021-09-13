@@ -227,6 +227,7 @@ def cut(deck, m):
             decklist.remove(_)
 
     decklist += swap
+
     print_to_string = ''
     for _ in decklist:
         print_to_string += '|' + _ + '|'
@@ -257,9 +258,9 @@ def shuffle(deck):
     for _ in decklist:
         if _ == "":
             decklist.remove(_)
-    middeck = round((len(decklist)/2))
-    left_half = decklist[0:middeck]
-    right_half = decklist[middeck:len(decklist)]
+    import math 
+    left_half = decklist[0:math.ceil(len(decklist)/2)]
+    right_half = decklist[math.ceil(len(decklist)/2):len(decklist)]
     
     shuffled = []
     l = 0
@@ -268,6 +269,7 @@ def shuffle(deck):
         if i % 2 == 0:
             shuffled.append(left_half[l])
             l += 1
+
         elif i % 2 != 0:
             shuffled.append(right_half[r])
             r += 1
@@ -311,8 +313,27 @@ def show_table_cards(cards):
     ---------------------------
     """
     
-    cards_to_show = '|$$|'
-    border = '-'*5        
+    decklist = cards.split("|")
+    for _ in decklist:
+        if _ == "":
+            decklist.remove(_)
+    show_this = ''
+    tmp = []
+    tmp1 = []
+    if len(decklist) <= 5:
+        show_this += cards
+    else:
+        print_to_string = ''
+        tmp += decklist[0:2]
+        for _ in tmp:
+            show_this += '|' + _ + '|'
+        show_this += "...."
+        tmp1 += decklist[len(decklist)-2:len(decklist)]
+        for _ in tmp1:
+            show_this += '|' + _ + '|'
+
+    cards_to_show = show_this
+    border = '-'*(len(show_this)+7)
     print(border)
     print('Table:', cards_to_show)
     print(border)

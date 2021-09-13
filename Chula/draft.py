@@ -17,24 +17,26 @@ def shuffle(deck):
     >>> shuffle('|2H||3H||4H||5H||JS||QS||KS||AS|')
     '|2H||JS||3H||QS||4H||KS||5H||AS|'
     """
+    import math
     decklist = deck.split("|")
     for _ in decklist:
         if _ == "":
             decklist.remove(_)
-    
-    left_half = decklist[0:round((len(decklist)/2))]
-    right_half = decklist[round((len(decklist)/2)):len(decklist)]
-    
+
+    left_half = decklist[0:math.ceil(len(decklist)/2)]
+    right_half = decklist[math.ceil(len(decklist)/2):len(decklist)]
+    print(left_half, right_half)
     shuffled = []
-    
+    l = 0
+    r = 0
     for i in range(len(decklist)):
         if i % 2 == 0:
-            shuffled.append(left_half[])
-            
+            shuffled.append(left_half[l])
+            l += 1
+
         elif i % 2 != 0:
-            shuffled.append(right_half[])
-            
-    
+            shuffled.append(right_half[r])
+            r += 1
     print_to_string = ''
     for _ in shuffled:
         print_to_string += '|' + _ + '|'
@@ -42,4 +44,4 @@ def shuffle(deck):
     new_deck = print_to_string
     print(new_deck)
 
-shuffle('|2H||3H||4H||5H||JS||QS||KS||5H||JS||QS||KS||5H||JS||QS||KS||5H||JS||QS||KS||5H||JS||QS||KS||5H||JS||QS||KS|')
+shuffle('|2H||3H||4H||5H||JS||QS||KS||2H||3H||4H||5H||JS||QS||KS||2H||3H||4H||5H||JS||QS||KS|')
