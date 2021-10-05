@@ -10,17 +10,7 @@ for _ in point_list:
     y = float(_[1])
     distance = math.sqrt(x**2 + y**2)
     pos = point_list.index(_) + 1
-    data_list.append([pos, x, y, distance])
+    data_list.append([distance, pos, x, y])
+data_list.sort(reverse=False)
 
-rearrange = []
-for _ in data_list: rearrange.append(_[3])
-rearrange.sort(reverse=False)
-print(rearrange)
-position = []
-for _ in range(len(data_list)):
-    pos = data_list[_].index(rearrange[_])
-    pos_data = data_list.index(pos)
-    print(data_list[_])
-    # position.append(data_list[pos])
-print(pos)
-# print(position[2])
+print("#" + str(data_list[2][1]) + ":" +"("+ str(data_list[2][2]) + ", " + str(data_list[2][3]) + ")")

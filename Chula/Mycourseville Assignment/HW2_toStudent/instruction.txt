@@ -1,0 +1,29 @@
+You are to write a simple game from scratch. 
+
+You are given 2 files, highscore.txt and map.txt
+Once you finish coding, submit only your main program file (.py).
+
+The game bevavior and sample runs are in the following vdo playlist:
+
+https://www.youtube.com/playlist?list=PLvvEdIhARkPIkn6AVGxaX8BhkQZXDCQb9
+
+Scoring Criteria (Full score = 10)
+- (1.5) Game can display the original map when starts
+- (0.5) in each step, input "a" will move the character to the left (updated map must be shown)
+- (0.5) in each step, input "d" will move the character to the right (updated map must be shown)
+- (0.5) in each step, other input will not move the character (updated map must be shown) 
+- (1) colliding with a coin increases score by 10 (must be true for every coin)
+- colliding with a wall 
+	- (0.5) produces a crash screen (crash point shown by "*").
+	- (0.5) and then game over screen is shown.
+- colliding with a finish line 
+        - (0.5) produces a screen where the character is at the finish line.
+	- (0.5) and then congratuations screen is shown.
+- (1) if the player score is enough as one of the high score, prompt the player to enter his/her name.
+- (1) if the player score is not enough as one of the high score, do not prompt the player to enter his/her name.
+- (1) high score is displayed correctly at the end of the game. With number of lines, combining with game over/congratulations screen, equal to 10 (not including the input name prompt).
+- (1) high score file is saved correctly.  
+
+
+
+

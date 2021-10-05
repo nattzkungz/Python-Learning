@@ -1,0 +1,10 @@
+ffffffffff
+x  x  x  x
+x  o     x
+x   o o  x
+x  x   o x
+x    x   x
+x  o    xx
+x   o o  x
+x    o   x
+x    A   x
