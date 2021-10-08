@@ -58,6 +58,7 @@ def highscoreHandler(score):
             name = input("Enter Your Name: ")
             if name > currentHigh[_][0]: shift_amt = 0
             elif name < currentHigh[_][0]: shift_amt = 1
+            else: shift_amt = 0
             currentHigh.insert(_ + shift_amt, [name,score])
             currentHigh.pop(-1)
             for e in currentHigh:
