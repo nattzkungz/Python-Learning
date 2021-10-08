@@ -1,13 +1,15 @@
-character = list(input())
-last1 = character[-1:]
-last2 = character[-2:]
-if last1 == ['s'] or last1 == ['x'] or last2 == ['ch'] or last2 == ['es']:
-    character.append("es")
-elif last1 == ['y'] and character[-2] not in ["a","e","i","o","u"]:
-    character.pop(-1)
-    character.append("ies")
-else:
-    character.append("s")
+filename_year = 
+fileopen = open(filename_year[0], "rt")
+
+all_std = []
 
 
-print("".join(character))
+year = filename_year[1][-2:]
+
+score = []
+
+for _ in all_std:
+    if _[0][:2] == year:
+        score.append(_[1])
+
+print(min(score), max(score), sum(score)/len(score))
