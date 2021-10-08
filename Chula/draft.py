@@ -1,15 +1,6 @@
-filename_year = 
-fileopen = open(filename_year[0], "rt")
+a = [["a","1"],["b","2"],["c","3"]]
 
-all_std = []
+b = ["a","b","c"]
 
+print("".join(_) for _ in b)
 
-year = filename_year[1][-2:]
-
-score = []
-
-for _ in all_std:
-    if _[0][:2] == year:
-        score.append(_[1])
-
-print(min(score), max(score), sum(score)/len(score))

@@ -1,27 +1,21 @@
-game_map = open("Chula/Mycourseville Assignment/HW2_toStudent/map.txt", "r")
-map_to_list = []
-count = -1
+highscore_file = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore.txt", "rt")
+map_to_list = [list(_.strip("\n")) for _ in open("Chula/Mycourseville Assignment/HW2_toStudent/map.txt", "rt").readlines()]
+tmp = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore_temp.txt")
 points = 0
 collision = False
 finished = False
-for _ in game_map.readlines():
-    count += 1
-    map_to_list.append(list(_.strip('\n')))
-times = count
-
+count = len(map_to_list) - 1
 
 def getPos(): return int(map_to_list[-1].index("A"))
 
 
-def renderMap(): 
+def renderMap():
     for _ in map_to_list: 
         print("".join(_))
 
+
 def charAction(direction):
-    global points
-    global collision
-    global finished
-    num = 0
+    global points, collision, finished
     if direction == 'a': num = -1
     elif direction == 'd': num = 1
     else: num = 0
@@ -40,43 +34,45 @@ def charAction(direction):
 def delLines():
     lineLength = len(map_to_list) - 1
     for _ in range(lineLength):
-        map_to_list[lineLength] = map_to_list[lineLength - 1]
+        if _ == len(map_to_list) - 1:
+            map_to_list.pop(-1)
+            map_to_list.insert(0, map_to_list[0])
+        else:
+            map_to_list[lineLength] = map_to_list[lineLength - 1]
         lineLength -= 1
 
 
 def highscoreDisplay():
-    print("**Highscores**")
+    print("High Scores:")
     for x in range(3):
-        print(highscore_file.readline().strip("\n"))
-    
+        print(tmp.readline().strip("\n"))
 
-def highscoreHandler(name, score):
-    highscore_file = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore.txt", "rt")
+def highscoreHandler(score):
     currentHigh = []
+    temp = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore_temp.txt", "w")
     for x in highscore_file.readlines():
         currentHigh.append(x.strip("\n").split(","))
-        
-gameStatus = True
+    for _ in range(len(currentHigh)):
+        if score >= int(currentHigh[_][1]):
+            name = input("Enter Your Name: ")
+            if name > currentHigh[_][0]: shift_amt = 0
+            elif name < currentHigh[_][0]: shift_amt = 1
+            currentHigh.insert(_ + shift_amt, [name,score])
+            currentHigh.pop(-1)
+            for e in currentHigh:
+                temp.write(e[0] + "," + str(e[1]) + "\n")
+            break
 
-while gameStatus:
-    times -= 1
+
+while True:
     if collision or finished:
         renderMap()
-        if collision:
-            print("---------------\n---------------\n---GAME OVER---\n---------------\n---------------")
-        elif finished:
-            print("--------------\n--------------\n---CONGRATS---\n--------------\n--------------")
+        if collision: print("-"*15+"\n---GAME OVER---\n"+"-"*15)
+        elif finished: print("-"*14+"\n---CONGRATS---\n"+"-"*14)
+        highscoreHandler(points)
         highscoreDisplay()
-        gameStatus = False
+        break
     else:
         renderMap()
         charAction(input().lower())
         delLines()
-
-
-# if gameStatus == False:
-
-#     if finished and points > 0:
-#         name = input("Type your name here: ")
-#     if collision and points > 0:
-#         name = input("Type your name here: ")
