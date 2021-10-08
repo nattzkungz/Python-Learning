@@ -1,6 +1,5 @@
-highscore_file = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore.txt", "rt")
+highscore_file = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore.txt")
 map_to_list = [list(_.strip("\n")) for _ in open("Chula/Mycourseville Assignment/HW2_toStudent/map.txt", "rt").readlines()]
-tmp = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore_temp.txt")
 points = 0
 collision = False
 finished = False
@@ -44,12 +43,14 @@ def delLines():
 
 def highscoreDisplay():
     print("High Scores:")
+    highscoreDisp = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore.txt")
     for x in range(3):
-        print(tmp.readline().strip("\n"))
+        print(highscoreDisp.readline().strip("\n"))
+
 
 def highscoreHandler(score):
     currentHigh = []
-    temp = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore_temp.txt", "w")
+    temp = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore_cache.txt", "w")
     for x in highscore_file.readlines():
         currentHigh.append(x.strip("\n").split(","))
     for _ in range(len(currentHigh)):
@@ -64,12 +65,24 @@ def highscoreHandler(score):
             break
 
 
+def transferData():
+    import os
+    os.remove("Chula/Mycourseville Assignment/HW2_toStudent/highscore.txt")
+    toThis = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore.txt", "w")
+    fromThis = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore_cache.txt")
+    for _ in fromThis:
+        toThis.write(_)
+    toThis.close()
+    os.remove("Chula/Mycourseville Assignment/HW2_toStudent/highscore_cache.txt")
+
+
 while True:
     if collision or finished:
         renderMap()
         if collision: print("-"*15+"\n---GAME OVER---\n"+"-"*15)
         elif finished: print("-"*14+"\n---CONGRATS---\n"+"-"*14)
         highscoreHandler(points)
+        transferData()
         highscoreDisplay()
         break
     else:
