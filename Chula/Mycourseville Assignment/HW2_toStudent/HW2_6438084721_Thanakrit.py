@@ -53,6 +53,7 @@ def highscoreHandler(score):
     temp = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore_cache.txt", "w")
     for x in highscore_file.readlines():
         currentHigh.append(x.strip("\n").split(","))
+    highscore_file.close()
     for _ in range(len(currentHigh)):
         if score >= int(currentHigh[_][1]):
             name = input("Enter Your Name: ")
@@ -63,7 +64,7 @@ def highscoreHandler(score):
             currentHigh.pop(-1)
             for e in currentHigh:
                 temp.write(e[0] + "," + str(e[1]) + "\n")
-            break
+            return True
 
 
 def transferData():
@@ -74,6 +75,7 @@ def transferData():
     for _ in fromThis:
         toThis.write(_)
     toThis.close()
+    fromThis.close()
     os.remove("Chula/Mycourseville Assignment/HW2_toStudent/highscore_cache.txt")
 
 
@@ -82,8 +84,8 @@ while True:
         renderMap()
         if collision: print("-"*15+"\n---GAME OVER---\n"+"-"*15)
         elif finished: print("-"*14+"\n---CONGRATS---\n"+"-"*14)
-        highscoreHandler(points)
-        transferData()
+        if highscoreHandler(points):
+            transferData()
         highscoreDisplay()
         break
     else:
