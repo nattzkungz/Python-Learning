@@ -1,10 +1,9 @@
-highscore_file = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore.txt")
 map_to_list = [list(_.strip("\n")) for _ in open("Chula/Mycourseville Assignment/HW2_toStudent/map.txt", "rt").readlines()]
 points = 0
 collision = False
 finished = False
 count = len(map_to_list) - 1
-
+run = 0
 def getPos(): return int(map_to_list[-1].index("A"))
 
 
@@ -33,10 +32,6 @@ def charAction(direction):
 def delLines():
     lineLength = len(map_to_list) - 1
     for _ in range(lineLength):
-        if _ == len(map_to_list) - 1:
-            map_to_list.pop(-1)
-            map_to_list.insert(0, map_to_list[0])
-        else:
             map_to_list[lineLength] = map_to_list[lineLength - 1]
         lineLength -= 1
 
@@ -50,6 +45,7 @@ def highscoreDisplay():
 
 def highscoreHandler(score):
     currentHigh = []
+    highscore_file = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore.txt")
     temp = open("Chula/Mycourseville Assignment/HW2_toStudent/highscore_cache.txt", "w")
     for x in highscore_file.readlines():
         currentHigh.append(x.strip("\n").split(","))
@@ -58,8 +54,10 @@ def highscoreHandler(score):
         if score >= int(currentHigh[_][1]):
             name = input("Enter Your Name: ")
             if name > currentHigh[_][0]: shift_amt = 0
-            elif name < currentHigh[_][0]: shift_amt = 1
-            else: shift_amt = 0
+            elif name < currentHigh[_][0]: 
+                if score >= int(currentHigh[_][1]): shift_amt = 0
+                else: shift_amt = 1
+            else: shift_amt = 1
             currentHigh.insert(_ + shift_amt, [name,score])
             currentHigh.pop(-1)
             for e in currentHigh:
@@ -80,10 +78,11 @@ def transferData():
 
 
 while True:
+    run += 1
     if collision or finished:
         renderMap()
-        if collision: print("-"*15+"\n---GAME OVER---\n"+"-"*15)
-        elif finished: print("-"*14+"\n---CONGRATS---\n"+"-"*14)
+        if collision: print("-"*15+"\n"+"-"*15+"\n"+"-"*15+"\n---GAME OVER---\n"+"-"*15+"\n"+"-"*15)
+        elif finished: print("-"*14+"\n"+"-"*14+"\n"+"-"*14+"\n---CONGRATS---\n"+"-"*14+"\n"+"-"*14)
         if highscoreHandler(points):
             transferData()
         highscoreDisplay()
@@ -92,3 +91,4 @@ while True:
         renderMap()
         charAction(input().lower())
         delLines()
+
