@@ -1,4 +1,6 @@
 {
     "configuration": "FlashMode=qio,FlashFreq=80,PartitionScheme=default,UploadSpeed=921600,DebugLevel=none",
-    "board": "esp32:esp32:m5stack-core-esp32"
+    "board": "esp32:esp32:m5stack-core-esp32",
+    "port": "/dev/cu.SLAB_USBtoUART",
+    "sketch": "Chula/Com Prog Lab/lab5-2/lab5-2.ino"
 }
