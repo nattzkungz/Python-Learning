@@ -1,6 +1,9 @@
-i = [2,3]
-b = [3,7]
+transactions = [set(['apple','banana','coconut']),
+    set(['apple','coconut','donut']),
+    set(['banana','coconut','donut']),
+    set(['apple','donut','egg']),
+    set(['banana','coconut','egg'])]
+products = set(['apple', 'banana', 'coconut', 'donut', 'egg'])
 
-for g in i:
-    for h in b:
-        print(g*h)
+print(transactions)
+print(products)

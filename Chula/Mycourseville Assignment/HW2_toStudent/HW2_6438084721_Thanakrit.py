@@ -32,7 +32,7 @@ def charAction(direction):
 def delLines():
     lineLength = len(map_to_list) - 1
     for _ in range(lineLength):
-            map_to_list[lineLength] = map_to_list[lineLength - 1]
+        map_to_list[lineLength] = map_to_list[lineLength - 1]
         lineLength -= 1
 
 
