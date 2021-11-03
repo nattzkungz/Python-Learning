@@ -1,5 +1,7 @@
-p = {"a" : []}
+a = {1:[55,20], 2:[20,50]}
 
-p["a"].append(5)
+import itertools
 
-print(p)
+b = dict(list(itertools.combinations(a, 2)))
+
+print(b)

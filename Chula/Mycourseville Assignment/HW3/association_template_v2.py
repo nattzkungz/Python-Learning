@@ -3,11 +3,10 @@ from itertools import permutations, combinations
 #############################################
 # FUNCTIONS (FILL CODE IN THIS PART)
 #############################################
+
 def read_transactions(file):
     # Input: read transactions from file, where each row refers to one transaction.
     # Return: (1) a list of sets (transactions) and (2) a set of all products
-    
-    # the code below can be deleted. It just gives an idea of outputs.
     import csv
     all_transactions = open(file, "r")
     check_dup = []
@@ -19,13 +18,14 @@ def read_transactions(file):
                 check_dup.append(i)
     return transactions, check_dup
 
+
 def generate_frequent_itemsets(transactions, min_support=0.5):
     # Input:
     #    transactions: a list of transaction sets.
     #    min_support: % of minimum support that must be converted to frequency with ROUND to be integer.
     # Return: "frequent_itemsets": a dictionary that stores itemsets whose frequency has passsed minimum frequency.
     #    key is a tuple of items, value is frequency
-    # the code below can be deleted. It just gives an idea of outputs.
+
     item_freq = {}
     for i in transactions:
         for _ in i:
@@ -34,9 +34,27 @@ def generate_frequent_itemsets(transactions, min_support=0.5):
             else:
                 item_freq[_] += 1
 
-    z = list(combinations(item_freq, 2))
-    print(z)
-    print(item_freq)
+    all_comb = list(combinations(item_freq, 2))
+
+    for payment in transactions:
+        for comb in all_comb:
+            check = []
+            for item in comb:
+                if item in payment and item not in check:
+                    check.append(item)
+            if len(check) == 2:
+                if tuple(check) not in item_freq:
+                    item_freq[tuple(check)] = 1
+                elif tuple(check) in item_freq:
+                    item_freq[tuple(check)] += 1
+    
+    re_this = {}
+    for bill in item_freq:
+        if item_freq[bill]/len(transactions) >= min_support:
+            re_this[bill] = item_freq[bill]
+
+    return re_this
+
 
 def generate_association_rules(frequent_itemsets, n, min_confidence=0.7):
     # Input:
@@ -50,9 +68,28 @@ def generate_association_rules(frequent_itemsets, n, min_confidence=0.7):
     #            If they are still equal, they must be sorted by alphabettically order "rule-string"
     
     # the code below can be deleted. It just gives an idea of outputs.
-    rules = {'banana=>coconut': [1.0, 0.6],
-             'coconut=>banana': [0.75, 0.6]}
-    return rules
+    all_itemsets = {}
+    itemset_with_permutations = 
+    
+    for itemset in frequent_itemsets:
+        if len(itemset) == 2:
+            support = round(frequent_itemsets[itemset]/n, 4)
+            for i in frequent_itemsets:
+                if itemset[0] == i:
+                    item_count = frequent_itemsets[i]
+            confidence = round(frequent_itemsets[itemset]/item_count, 4)
+            text = itemset[0] + "=>" + itemset[1]
+            all_itemsets[text] = [confidence, support]
+    
+    sorted_itemsets_list = sorted(all_itemsets, key=all_itemsets.get, reverse=True)
+
+    sorted_itemsets_dict = {}
+
+    for value in sorted_itemsets_list:
+        sorted_itemsets_dict[value] = all_itemsets[value]
+    
+    return sorted_itemsets_dict
+
 
 def recommend_best_rule(input_set, rules):
     # Input:
@@ -63,9 +100,18 @@ def recommend_best_rule(input_set, rules):
     #    if LHS is not founded, print 'NO RECOMMEND'
     
     # the code below can be deleted. It just gives an idea of outputs.
-    input_set =  'banana'
-    output_set = 'coconut'
-    return output_set
+    
+    split_rules = []
+    for suggestion in rules:
+        split_rules.append(suggestion.split("=>"))
+
+    re_this = "NO RECOMMEND"
+    for items in split_rules:
+        if items[0] == input_set:
+            re_this = items[1]
+    
+    return re_this
+        
 
 #############################################
 # GIVEN FUNCTIONS (DO NOT CHANGE THIS PART)
@@ -94,8 +140,11 @@ def show_first_rules(rules,n):
 # MAIN (DO NOT CHANGE THIS PART)
 #############################################
 
+
+#############################################
+
 # Step1: read transactions
-transactions,products = read_transactions('/Users/thanakrittr/Desktop/VSCode/Python-Learning/Chula/Mycourseville Assignment/HW3/transactions.csv')
+transactions,products = read_transactions('Chula/Mycourseville Assignment/HW3/transactions.csv')
 print('#transactions = ',len(transactions))
 print('#products = ',len(products))
 
@@ -108,7 +157,9 @@ show_first_itemsets(frequent_itemsets, 20)
 
 # Step3: generate association rules
 rules = generate_association_rules(frequent_itemsets, len(transactions), min_conf)
+print('#rules = ',len(rules))
 show_first_rules(rules, 20)
+print()
 
 # Step4: recommend
 print('Enter query products to be recommended (q to quit):')
