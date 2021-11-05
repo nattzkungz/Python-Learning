@@ -7,11 +7,10 @@ from itertools import permutations, combinations
 def read_transactions(file):
     # Input: read transactions from file, where each row refers to one transaction.
     # Return: (1) a list of sets (transactions) and (2) a set of all products
-    import csv
-    all_transactions = open(file, "r")
+    all_transactions = [i.strip("\n").split(",") for i in open(file, "r")]
     check_dup = []
     transactions = []
-    for _ in csv.reader(all_transactions):
+    for _ in all_transactions:
         transactions.append(set(_))
         for i in _:
             if i not in check_dup:
@@ -47,7 +46,7 @@ def generate_frequent_itemsets(transactions, min_support=0.5):
                     item_freq[tuple(check)] = 1
                 elif tuple(check) in item_freq:
                     item_freq[tuple(check)] += 1
-    
+
     re_this = {}
     for bill in item_freq:
         if item_freq[bill]/len(transactions) >= min_support:
@@ -67,22 +66,46 @@ def generate_association_rules(frequent_itemsets, n, min_confidence=0.7):
     #         All rules must be sorted by confidence and support in descending orders.
     #            If they are still equal, they must be sorted by alphabettically order "rule-string"
     
-    # the code below can be deleted. It just gives an idea of outputs.
-    all_itemsets = {}
-    itemset_with_permutations = 
+    all_item = []
+    prod_count = {}
+    # Use 2 similar for loop to reduce resource usage
+    for i in frequent_itemsets:
+        if len(i) == 2:
+            for h in i:
+                if h not in all_item:
+                    all_item.append(h)
+        elif type(i) != tuple:
+            if i not in prod_count:
+                prod_count[i] = frequent_itemsets[i]
     
-    for itemset in frequent_itemsets:
-        if len(itemset) == 2:
-            support = round(frequent_itemsets[itemset]/n, 4)
-            for i in frequent_itemsets:
-                if itemset[0] == i:
-                    item_count = frequent_itemsets[i]
-            confidence = round(frequent_itemsets[itemset]/item_count, 4)
-            text = itemset[0] + "=>" + itemset[1]
-            all_itemsets[text] = [confidence, support]
+    all_item_in_set = set(all_item)
+    permutation_list = list(permutations(all_item_in_set, 2))
+    
+    permutation_dict = {}
+
+    for i in transactions:
+        for perm in permutation_list:
+            check = []
+            for item in perm:
+                if item in i and item not in check:
+                    check.append(item)
+            if len(check) == 2:
+                if tuple(check) not in permutation_dict:
+                    permutation_dict[tuple(check)] = 1
+                elif tuple(check) in permutation_dict:
+                    permutation_dict[tuple(check)] += 1
+    
+    all_itemsets = {}
+
+    for itemset in permutation_dict:
+        support = round(permutation_dict[itemset]/n, 4)
+        item_count = prod_count[itemset[0]]
+        confidence = round(permutation_dict[itemset]/item_count, 4)
+        text = itemset[0] + "=>" + itemset[1]
+        all_itemsets[text] = [confidence, support]
     
     sorted_itemsets_list = sorted(all_itemsets, key=all_itemsets.get, reverse=True)
-
+    
     sorted_itemsets_dict = {}
 
     for value in sorted_itemsets_list:
@@ -106,12 +129,13 @@ def recommend_best_rule(input_set, rules):
         split_rules.append(suggestion.split("=>"))
 
     re_this = "NO RECOMMEND"
-    for items in split_rules:
-        if items[0] == input_set:
-            re_this = items[1]
+    for n in range(len(split_rules)):
+        if input_set == split_rules[n][0]:
+            re_this = split_rules[n][1]
+            return re_this
     
     return re_this
-        
+
 
 #############################################
 # GIVEN FUNCTIONS (DO NOT CHANGE THIS PART)
