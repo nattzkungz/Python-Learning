@@ -101,8 +101,9 @@ def generate_association_rules(frequent_itemsets, n, min_confidence=0.7):
         support = round(permutation_dict[itemset]/n, 4)
         item_count = prod_count[itemset[0]]
         confidence = round(permutation_dict[itemset]/item_count, 4)
-        text = itemset[0] + "=>" + itemset[1]
-        all_itemsets[text] = [confidence, support]
+        if confidence >= min_confidence:
+            text = itemset[0] + "=>" + itemset[1]
+            all_itemsets[text] = [confidence, support]
     
     sorted_itemsets_list = sorted(all_itemsets, key=all_itemsets.get, reverse=True)
     
