@@ -1,7 +1,9 @@
-a = {1:[55,20], 2:[20,50]}
-
-import itertools
-
-b = dict(list(itertools.combinations(a, 2)))
-
-print(b)
+array = "a b c"
+pos = 0
+count = 0
+for i in array:
+    pos = indexof(" ", pos) + 1
+    if pos != -1:
+        count += 1
+    else:
+        pass
