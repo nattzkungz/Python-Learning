@@ -65,7 +65,7 @@ def generate_association_rules(frequent_itemsets, n, min_confidence=0.7):
     #         Confidence and support must be rounded with 4 dicimal points.
     #         All rules must be sorted by confidence and support in descending orders.
     #            If they are still equal, they must be sorted by alphabettically order "rule-string"
-    
+
     all_item = []
     prod_count = {}
     # Use 2 similar for loop to reduce resource usage
@@ -77,10 +77,10 @@ def generate_association_rules(frequent_itemsets, n, min_confidence=0.7):
         elif type(i) != tuple:
             if i not in prod_count:
                 prod_count[i] = frequent_itemsets[i]
-    
+
     all_item_in_set = set(all_item)
     permutation_list = list(permutations(all_item_in_set, 2))
-    
+
     permutation_dict = {}
 
     for i in transactions:
@@ -94,7 +94,7 @@ def generate_association_rules(frequent_itemsets, n, min_confidence=0.7):
                     permutation_dict[tuple(check)] = 1
                 elif tuple(check) in permutation_dict:
                     permutation_dict[tuple(check)] += 1
-    
+
     all_itemsets = {}
 
     for itemset in permutation_dict:
@@ -103,16 +103,18 @@ def generate_association_rules(frequent_itemsets, n, min_confidence=0.7):
         confidence = round(permutation_dict[itemset]/item_count, 4)
         if confidence >= min_confidence:
             text = itemset[0] + "=>" + itemset[1]
-            all_itemsets[text] = [confidence, support]
-    
-    sorted_itemsets_list = sorted(all_itemsets, key=all_itemsets.get, reverse=True)
-    
-    sorted_itemsets_dict = {}
+            all_itemsets[text] = [-confidence, -support]
+    print(all_itemsets)
+    sorted_itemsets_list = sorted(all_itemsets, key=all_itemsets.get, reverse=False)
+    sorted_itemsets_dict1 = {}
+    for i in all_itemsets:
+        sorted_itemsets_dict1[i] = [-all_itemsets[i][0], -all_itemsets[i][1]]
+    sorted_itemsets_dict2 = {}
 
     for value in sorted_itemsets_list:
-        sorted_itemsets_dict[value] = all_itemsets[value]
-    
-    return sorted_itemsets_dict
+        sorted_itemsets_dict2[value] = sorted_itemsets_dict1[value]
+
+    return sorted_itemsets_dict2
 
 
 def recommend_best_rule(input_set, rules):
