@@ -171,7 +171,7 @@ def show_first_rules(rules,n):
 #############################################
 
 # Step1: read transactions
-transactions,products = read_transactions('Chula/Mycourseville Assignment/HW3/transactions.csv')
+transactions,products = read_transactions('/Users/thanakrittr/Desktop/VSCode/Python-Learning/Chula/Mycourseville Assignment/HW3/transactions.csv')
 print('#transactions = ',len(transactions))
 print('#products = ',len(products))
 
