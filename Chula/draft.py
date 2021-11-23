@@ -1,5 +1,14 @@
-a = [["A", 2], ["B", 3]]
+import numpy as np
+listlines = []
+file = open('Chula/Mycourseville Assignment/HW4_Students (Shared)/scores_utf8.csv','r')
 
-for i in range(len(a)):
-    if "A" in a[i]:
-        print("d")
+for line in file :
+    lines = line.strip().split(',')
+    listlines.append(lines)
+
+oldarraylines = np.array(listlines)
+arraylines = np.delete(oldarraylines,0,0)
+nonamearray = np.delete(arraylines, 0,1)
+
+sumscores = np.sum(nonamearray)
+print(sumscores)

@@ -39,7 +39,7 @@ def finished(status):
 def check_finished(stamina, current_pos):
     if stamina >= 0 and current_pos == "E":
         return True
-    elif stamina < 0:
+    elif stamina <= 0:
         return False
 
 
@@ -50,11 +50,10 @@ def finished_screen(stamina, path):
 
 current_pos = "A"
 count, cost, stamina = 0, 0, 25
-route_taken = []
+route_taken = [current_pos]
 print("Game has started.......................")
 print("You have a full stamina of 25 .........")
 while True:
-    route_taken.append(current_pos)
     if check_finished(stamina, current_pos) is True:
         print(f"Your current Stamina is : {str(stamina)} You have used up {cost} from the total stamina")
         finished(True)
@@ -62,7 +61,7 @@ while True:
         break
     elif check_finished(stamina, current_pos) is False:
         finished(False)
-        finished_screen(0, route_disp(route_taken))
+        finished_screen(stamina, route_disp(route_taken))
         break
     if count > 0:
         print(f"Your current Stamina is : {str(stamina)} You have used up {cost} from the total stamina")
@@ -70,8 +69,7 @@ while True:
     print(f"You are currently at : {current_pos}")
     print("Choose your destination................")
     avbl_way = avbl_route(current_pos)
-    path_avbl = [path[0] for path in avbl_way]
-    path_cost = [path[1] for path in avbl_way]
+    path_avbl, path_cost = [path[0] for path in avbl_way], [path[1] for path in avbl_way]
     for route in avbl_way:
         print(f"{route[0]}: {route[1]}")
     found = False
@@ -79,6 +77,8 @@ while True:
         next_pos = input()
         if next_pos in path_avbl:
             cost = path_cost[path_avbl.index(next_pos)]
+            if stamina - cost > 0:
+                route_taken.append(next_pos)
             stamina -= cost
             current_pos = next_pos
             found = True
