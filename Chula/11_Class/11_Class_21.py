@@ -9,48 +9,35 @@ class Complex:
             self.operand = "-"
 
     def __str__(self):
-        num_list = [str(self.real_num), self.operand ,str(self.imagi_num), "i"]
-        if num_list[0] == "0":
-            num_list.pop(0)
-            if num_list[1] == "+":
-                num_list.pop(0)
-        if num_list[2] == "0":
-            for x in range(3): num_list.pop(1)
-        if num_list[2] == "1" or num_list[2] == "-1":
-            num_list.pop(2)
-        if num_list[1] == "1" or num_list[1] == "-1":
-            num_list.pop(1)
-        tmp = ""
-        for g in num_list:
-            tmp += g
-        return tmp
+        if self.imagi_num == 0:
+            return str(self.real_num)
+        elif self.imagi_num == 1 or self.imagi_num == -1:
+            if self.real_num == 0:
+                if self.imagi_num > 0:
+                    return "i"
+                return str(self.operand) + "i"
+            return str(self.real_num) + self.operand + "i"
+        elif self.real_num == 0:
+            return str(self.imagi_num) + "i"
+        else:
+            if self.imagi_num < 0:
+                self.operand = ""
+            return str(self.real_num) + self.operand + str(self.imagi_num) + "i" 
     
     def __add__(self, rhs):
         self.real_num_result = self.real_num + rhs.real_num
         self.imagi_num_result = self.imagi_num + rhs.imagi_num
-        if self.imagi_num_result < 0:
-            operand = "-"
-        else:
-            operand = "+"
-        return str(self.real_num_result)+operand+ str(self.imagi_num_result) +"i"
+        return Complex(self.real_num_result, self.imagi_num_result)
 
     def __mul__(self, rhs):
         self.real_num_result = (self.real_num*rhs.real_num) - (self.imagi_num*rhs.imagi_num)
         self.imagi_num_result = (self.real_num*rhs.imagi_num) + (self.imagi_num*rhs.real_num)
-        if self.imagi_num_result < 0:
-            operand = "-"
-        else:
-            operand = "+"
-        return str(self.real_num_result)+operand+ str(self.imagi_num_result) +"i"
+        return Complex(self.real_num_result, self.imagi_num_result)
     
     def __truediv__(self, rhs):
-        self.real_num_result = ((self.real_num*rhs.real_num) + (self.imagi_num*rhs.imagi_num)) / (self.imagi_num**2 + rhs.imagi_num**2)
-        self.imagi_num_result = ((-self.real_num*rhs.imagi_num) + (self.imagi_num*rhs.real_num)) / (self.imagi_num**2 + rhs.imagi_num**2)
-        if self.imagi_num_result < 0:
-            operand = "-"
-        else:
-            operand = "+"
-        return str(self.real_num_result)+operand+ str(self.imagi_num_result) +"i"
+        self.real_num_result = ((self.real_num*rhs.real_num) + (self.imagi_num*rhs.imagi_num)) / (rhs.real_num**2 + rhs.imagi_num**2)
+        self.imagi_num_result = ((-self.real_num*rhs.imagi_num) + (self.imagi_num*rhs.real_num)) / (rhs.real_num**2 + rhs.imagi_num**2)
+        return Complex(self.real_num_result, self.imagi_num_result)
 
 
 
@@ -62,4 +49,3 @@ elif t==2: print(c2)
 elif t==3: print(c1+c2)
 elif t==4: print(c1*c2)
 else:print(c1/c2)
-

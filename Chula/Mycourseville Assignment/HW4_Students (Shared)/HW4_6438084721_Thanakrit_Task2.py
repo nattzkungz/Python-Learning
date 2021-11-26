@@ -1,14 +1,12 @@
 import numpy as np
-datapath = "Chula/Mycourseville Assignment/HW4_Students (Shared)/"
-
 ## Function
 def readfile(path): return np.array([_.strip("\n").strip("\ufeff").split(",") for _ in open(path,"r").readlines()])
 def sum_scores(array): return np.sum(np.array(array, dtype='i'), axis=1)
 
 ## File Handler
-raw_data = readfile(datapath + "scores_utf8.csv")
+raw_data = readfile("Chula/Mycourseville Assignment/HW4_Students (Shared)/scores_utf8.csv")
 # raw_data = readfile(datapath + "scores_correct_utf8.csv") # For testcase checking only
-
+print(raw_data)
 ## Main Process
 sum_of_score, total_score_given = sum_scores(raw_data[1:,1:4]), sum_scores(raw_data[1:,4:])
 score_diff = np.array(np.abs(sum_of_score - total_score_given))
