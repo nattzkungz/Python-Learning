@@ -4,9 +4,9 @@ def readfile(path): return np.array([_.strip("\n").strip("\ufeff").split(",") fo
 def sum_scores(array): return np.sum(np.array(array, dtype='i'), axis=1)
 
 ## File Handler
-raw_data = readfile("Chula/Mycourseville Assignment/HW4_Students (Shared)/scores_utf8.csv")
+raw_data = readfile("scores_utf8.csv")
 # raw_data = readfile(datapath + "scores_correct_utf8.csv") # For testcase checking only
-print(raw_data)
+
 ## Main Process
 sum_of_score, total_score_given = sum_scores(raw_data[1:,1:4]), sum_scores(raw_data[1:,4:])
 score_diff = np.array(np.abs(sum_of_score - total_score_given))
@@ -27,4 +27,3 @@ else:
         print(f"{str(raw_data[i+1][0])}'s score is {float(score_diff[i])} different from the actual total score")
         print(f"The incorrect total score is {raw_data[i][-1]}")
         print(f"The actual score should be {sum_of_score[i]}\n")
-

@@ -61,7 +61,7 @@ while True:
         break
     elif check_finished(stamina, current_pos) is False:
         finished(False)
-        finished_screen(stamina, route_disp(route_taken))
+        finished_screen(0, route_disp(route_taken))
         break
     if count > 0:
         print(f"Your current Stamina is : {str(stamina)} You have used up {cost} from the total stamina")
