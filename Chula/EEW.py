@@ -7,7 +7,7 @@
 # print(count)
 
 from pandas import *
-xlsx = read_excel('Chula\\eew1.xlsx')
+xlsx = read_excel(r'Chula\\eew1.xlsx')
 xl = xlsx.to_dict()
 
 motorbike_count = xl["Vehicle"]
@@ -50,5 +50,23 @@ for i in total_acc:
         percentage[i] = perc
 
 print("Calculated Percentages for Motorbikes Accident in each Provinces are: ")
-for i in percentage:
-    print(i, percentage[i])
+
+from matplotlib import pyplot as plt
+import matplotlib as mpl
+# mpl.font_manager.fontManager.addfont("ChulaCharasNewReg.ttf")
+mpl.rc("font", family="ChulaCharasNew")
+sortedPercentage = dict(sorted(percentage.items(), key=lambda item: item[1], reverse=True))
+for i in sortedPercentage:
+    text = str(i) +" : " +str(sortedPercentage[i]) +"%"
+    print(text)
+
+# accProv = list(sortedPercentage.keys())
+# accCount = list(sortedPercentage.values())
+# plt.rcParams['font.size'] = '16'
+# fig = plt.figure(figsize= (10,5))
+# fig.suptitle('Percentages of Motorcycle death vs total death in each provinces', fontsize=28)
+# plt.bar(accProv, accCount, color="maroon", width=0.4)
+
+# plt.xlabel("Provinces", fontsize=28)
+# plt.ylabel("Percentages", fontsize=28)
+# plt.show()
