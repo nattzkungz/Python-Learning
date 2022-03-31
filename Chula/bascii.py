@@ -1,4 +1,3 @@
-
 def vowel_const_average(filename):
     max_vow = 0
     max_const = 0
@@ -20,7 +19,7 @@ def vowel_const_average(filename):
                 if i in vowel_list:
                     count += 1
         return count
-    
+
     for i in file:
         for j in i:
             word_count += 1
