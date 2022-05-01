@@ -23,8 +23,7 @@ def grading(score):
 def scoring(answers, solution):
     scores = []
     for sid, ans in answers:
-        score = marking(ans, solution) / \
-                len(solution) * 100
+        score = marking(ans, solution) / len(solution) * 100
         grade = grading(score)
         scores.append([sid, score, grade])
     return scores
