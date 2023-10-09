@@ -11,4 +11,3 @@ for _ in range (times):
         print(fullname[nickname.index(name)])
     else:
         print("Not found")
-    
