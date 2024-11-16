@@ -1,4 +1,4 @@
-map_to_list = [list(_.strip("\n")) for _ in open("Chula/Mycourseville Assignment/HW2_toStudent/map.txt", "rt").readlines()]
+map_to_list = [list(_.strip("\n")) for _ in open("Python-Learning/Chula/Mycourseville Assignment/HW2_toStudent/map.txt", "rt").readlines()]
 points = 0
 collision = False
 finished = False

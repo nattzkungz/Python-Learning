@@ -18,4 +18,4 @@ for i in range(9999999999):
 		token = res_json["Token"]
 	else:
 		print(f"PIP :( {res.status_code}")
-	time.sleep(30) #delay a bit
+	time.sleep(10) #delay a bit
